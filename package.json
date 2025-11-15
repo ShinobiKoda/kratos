@@ -1,0 +1,15 @@
+{
+  "name": "kratos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kratos monorepo workspace",
+  "scripts": {
+    "dev": "pnpm --parallel -r dev",
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "clean": "pnpm -r clean"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

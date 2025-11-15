@@ -1,0 +1,14 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Server application",
+  "scripts": {
+    "dev": "echo \"Add your dev command here\"",
+    "build": "echo \"Add your build command here\"",
+    "test": "echo \"Add your test command here\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
