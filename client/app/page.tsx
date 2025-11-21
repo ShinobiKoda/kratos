@@ -1,6 +1,5 @@
-import Homepage from "./components/Homepage";
+import { redirect } from "next/navigation";
+
 export default function Home() {
-  return (
-   <Homepage />
-  );
+  redirect("/Dashboard/Home");
 }
