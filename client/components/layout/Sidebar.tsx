@@ -48,7 +48,7 @@ export function AppSidebar() {
   const { toggleSidebar } = useSidebar();
 
   return (
-    <Sidebar side="right">
+    <Sidebar side="left">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>RoomRadar</SidebarGroupLabel>

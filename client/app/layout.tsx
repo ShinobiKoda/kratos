@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+
 import Navbar from "../components/layout/Navbar";
 import { AppSidebar } from "@/components/layout/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import SearchInput from "@/components/SearchInput";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -10,6 +12,8 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
+
+
 
 export const metadata: Metadata = {
   title: "Room Radar | Dashboard",
@@ -31,6 +35,8 @@ export default function RootLayout({
 
             <div className="flex flex-col w-full">
               <Navbar />
+              <SearchInput />
+
               <main className="mt-4">{children}</main>
             </div>
           </div>
