@@ -30,7 +30,7 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState("Dashboard");
 
   return (
-    <nav className="w-full pt-7 px-4 xl:px-[82px]">
+    <nav className="w-full pt-7 px-4 xl:px-[82px] max-w-[1440px] mx-auto">
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center gap-4">
           <button
