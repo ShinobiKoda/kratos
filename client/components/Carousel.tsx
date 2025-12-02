@@ -1,13 +1,27 @@
-import * as React from "react"
-
-import { Card, CardContent } from "@/components/ui/card"
+import Image from "next/image";
+import { IoLocationOutline } from "react-icons/io5";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
+import { useState, useEffect } from "react";
+import { fetchListings } from "@/lib/api/FetchListings";
+import { Listing } from "@/lib/types/Listings";
 
 export function CarouselCard() {
+  const [data, setData] = useState<Listing[]>([]);
+
+  const getListing = async (): Promise<void> => {
+    const listings = await fetchListings();
+    setData(listings);
+  };
+
+  useEffect(() => {
+    getListing();
+  }, []);
+
   return (
     <Carousel
       opts={{
@@ -16,12 +30,33 @@ export function CarouselCard() {
       className="w-full max-w-full"
     >
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="md:basis-1/4">
-            <div className="p-1">
+        {data.map((item, index) => (
+          <CarouselItem
+            key={item.id ?? index}
+            className="basis-1/2 md:basis-1/4"
+          >
+            <div className="w-[182px] pr-2.5">
               <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-3xl font-semibold">{index + 1}</span>
+                <CardHeader>
+                  <Image
+                    src={item.image}
+                    alt={item.name}
+                    height={100}
+                    width={100}
+                    className="w-full"
+                  />
+                </CardHeader>
+                <CardContent className="flex flex-col">
+                  <h4 className="font-medium leading-normal text-[15px]">
+                    {item.name}
+                  </h4>
+                  <p className="flex items-center text-(--dark-grey) text-[12px] font-normal leading-normal">
+                    <IoLocationOutline />
+                    <span>{item.name}</span>
+                  </p>
+                  <p className="flex items-center text-(--dark-grey) text-[12px] font-normal leading-normal">
+                    Price: {item.price}
+                  </p>
                 </CardContent>
               </Card>
             </div>
@@ -29,5 +64,5 @@ export function CarouselCard() {
         ))}
       </CarouselContent>
     </Carousel>
-  )
+  );
 }
