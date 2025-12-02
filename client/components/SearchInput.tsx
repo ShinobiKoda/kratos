@@ -1,10 +1,12 @@
-"use client"
+"use client";
 
 import { Search } from "lucide-react";
+import { zoomIn } from "./animation/motion";
+import { motion } from "motion/react";
 
 const SearchInput = () => {
   return (
-    <div className="w-full px-4 xl:hidden mt-8">
+    <motion.div variants={zoomIn} initial="hidden" animate="show" className="w-full px-4 xl:hidden mt-8">
       <div className="flex items-center rounded-[27px] shadow-[0px_4px_4px_0px_#00000040] py-2.5 px-4 gap-2">
         <Search size={31} color="#5B5B5B" className="font-light" />
         <input
@@ -13,7 +15,7 @@ const SearchInput = () => {
           placeholder="Search"
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -11,6 +11,8 @@ export async function fetchListings(): Promise<Listing> {
     }
 
     const data: Partial<Listing> = await res.json();
+    // simulate network/loading delay
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     return {
       saved_listings: data.saved_listings ?? [],
       recommended_listings: data.recommended_listings ?? [],

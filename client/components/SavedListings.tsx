@@ -1,104 +1,132 @@
+"use client";
+
 import Image from "next/image";
 import { IoLocationOutline } from "react-icons/io5";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { useState, useEffect } from "react";
+import { motion } from "motion/react";
 import { fetchListings } from "@/lib/api/FetchListings";
 import { SavedListing } from "@/lib/types/Listings";
+import { ListingSkeleton } from "@/components/ListingSkeleton";
+import { staggerItem } from "@/components/animation/motion";
 
 export function SavedListings() {
   const [data, setData] = useState<SavedListing[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getListing = async (): Promise<void> => {
-    const listings = await fetchListings();
-    setData(listings.saved_listings ?? []);
+    setLoading(true);
+    try {
+      const listings = await fetchListings();
+      setData(listings.saved_listings ?? []);
+    } finally {
+      setLoading(false);
+    }
   };
-
-  function truncate(text:string, maxLength: number) {
-    return text.length > maxLength ? text.substring(0, maxLength) + "…" : text;
-  }
 
   useEffect(() => {
     getListing();
   }, []);
 
+  function truncate(text: string, maxLength: number) {
+    return text.length > maxLength ? text.substring(0, maxLength) + "…" : text;
+  }
+
   return (
     <div className="w-full">
-      <Carousel
-        opts={{
-          align: "start",
-        }}
-        className="w-full max-w-full md:hidden"
-      >
+      {/* ---------------- MOBILE CAROUSEL ---------------- */}
+      <Carousel opts={{ align: "start" }} className="w-full max-w-full md:hidden">
         <CarouselContent>
-          {data.map((item, index) => (
-            <CarouselItem
-              key={item.id ?? index}
-              className="basis-1/2 sm:basis-1/3 md:basis-1/4"
-            >
-              <div className="w-full max-w-[273px] pr-2.5">
-                <Card>
-                  <CardHeader>
-                    <Image
-                      src={item.image}
-                      alt={item.name}
-                      height={100}
-                      width={100}
-                      className="w-full"
-                    />
-                  </CardHeader>
-                  <CardContent className="flex flex-col">
-                    <h4 className="font-medium leading-normal text-[15px] lg:text-[20px]">
-                      {item.name}
-                    </h4>
-                    <p className="flex items-center text-(--dark-grey) text-[12px] lg:text-sm font-normal leading-normal">
-                      <IoLocationOutline />
-                      <span>{item.location}</span>
-                    </p>
-                    <p className="flex items-center text-(--dark-grey) text-[12px] font-normal leading-normal lg:text-sm">
-                      Price: {item.price}
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
-          ))}
+          {loading
+            ? Array.from({ length: 8 }).map((_, i) => (
+                <CarouselItem key={`skeleton-${i}`} className="basis-1/2 sm:basis-1/3 md:basis-1/4">
+                  <ListingSkeleton />
+                </CarouselItem>
+              ))
+            : data.map((item, index) => (
+                <CarouselItem key={item.id ?? index} className="basis-1/2 sm:basis-1/3 md:basis-1/4">
+                  <motion.div
+                    variants={staggerItem}
+                    initial="hidden"
+                    animate="show"
+                    viewport={{ once: true, amount: 0.2 }}
+                    custom={index} // index used for stagger delay
+                    className="w-full max-w-[273px] pr-2.5"
+                  >
+                    <Card>
+                      <CardHeader>
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          height={100}
+                          width={100}
+                          className="w-full"
+                        />
+                      </CardHeader>
+                      <CardContent className="flex flex-col">
+                        <h4 className="font-medium leading-normal text-[15px] lg:text-[20px]">
+                          {truncate(item.name, 16)}
+                        </h4>
+                        <p className="flex items-center text-(--dark-grey) text-[12px] lg:text-sm">
+                          <IoLocationOutline />
+                          <span>{truncate(item.location, 11)}</span>
+                        </p>
+                        <p className="flex items-center text-(--dark-grey) text-[12px] lg:text-sm">
+                          Price: {truncate(item.price, 11)}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </CarouselItem>
+              ))}
         </CarouselContent>
       </Carousel>
 
+      {/* ---------------- DESKTOP GRID ---------------- */}
       <div className="w-full hidden md:block">
         <div className="grid grid-cols-4 gap-4">
-          {data.map((item, index) => (
-            <div className="max-w-[273px]" key={item.id}>
-              <Card>
-                <CardHeader>
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    height={100}
-                    width={100}
-                    className="w-full max-w-[273px]"
-                  />
-                </CardHeader>
-                <CardContent className="flex flex-col">
-                  <h4 className="font-medium leading-normal text-[15px] lg:text-[20px]">
-                    {truncate(item.name, 16)}
-                  </h4>
-                  <p className="flex items-center text-(--dark-grey) text-[12px] lg:text-sm font-normal leading-normal">
-                    <IoLocationOutline />
-                    <span>{truncate(item.location, 11)}</span>
-                  </p>
-                  <p className="flex items-center text-(--dark-grey) text-[12px] font-normal leading-normal lg:text-sm">
-                    Price: {truncate(item.price, 11)}
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          ))}
+          {loading
+            ? Array.from({ length: 8 }).map((_, i) => (
+                <div key={`skeleton-grid-${i}`} className="max-w-[273px]">
+                  <ListingSkeleton />
+                </div>
+              ))
+            : data.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  variants={staggerItem}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  custom={index} // stagger delay
+                  className="max-w-[273px]"
+                >
+                  <Card>
+                    <CardHeader>
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        height={100}
+                        width={100}
+                        className="w-full max-w-[273px]"
+                      />
+                    </CardHeader>
+                    <CardContent className="flex flex-col">
+                      <h4 className="font-medium leading-normal text-[15px] lg:text-[20px]">
+                        {truncate(item.name, 16)}
+                      </h4>
+                      <p className="flex items-center text-(--dark-grey) text-[12px] lg:text-sm">
+                        <IoLocationOutline />
+                        <span>{truncate(item.location, 11)}</span>
+                      </p>
+                      <p className="flex items-center text-(--dark-grey) text-[12px] lg:text-sm">
+                        Price: {truncate(item.price, 11)}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
         </div>
       </div>
     </div>
