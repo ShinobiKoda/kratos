@@ -8,6 +8,7 @@ import { FaCaretRight } from "react-icons/fa6";
 import { IoLocationOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import { motion } from "motion/react";
+import FeaturedLodge from "@/components/FeaturedLodges";
 import {
   softReveal,
   slideIn,
@@ -167,6 +168,20 @@ const Homepage = () => {
             </button>
           </div>
         </motion.div>
+      </section>
+
+      <section className="w-full mt-[37px] lg:mt-[172px] max-w-[1440px] mx-auto px-4 xl:px-[82px] bg-[#383838] py-[54px]">
+        <div className="w-full space-y-[9px]">
+          <h2
+            className={`${inter.variable} font-medium text-xl text-(--gold-yellow) lg:text-[40px]`}
+          >
+            ✨ Featured Lodges 
+          </h2>
+          <div className="h-0.5 bg-(--gold-yellow)"></div>
+        </div>
+        <div className="mt-[42px]">
+          <FeaturedLodge />
+        </div>
       </section>
     </div>
   );

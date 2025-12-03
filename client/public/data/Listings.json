@@ -115,5 +115,71 @@
       "price": "₦1,120,000 / year",
       "image": "/images/listing-img-mobile.svg"
     }
+  ],
+  "featured_lodges": [
+    {
+      "id": "201",
+      "name": "Harborview Residences",
+      "location": "7 Marina Crescent",
+      "description": "Two-bedroom apartment with bay windows and a modern kitchen.",
+      "price": "₦620,000 / year",
+      "image": "/images/listing-img-mobile.svg"
+    },
+    {
+      "id": "202",
+      "name": "Echo Park Suites",
+      "location": "14 Greenwood Lane",
+      "description": "Bright studio with flexible workspace and private balcony.",
+      "price": "₦385,000 / year",
+      "image": "/images/listing-img-mobile.svg"
+    },
+    {
+      "id": "203",
+      "name": "Willow Creek Homes",
+      "location": "28 Creekside Drive",
+      "description": "Family-friendly 3-bedroom with garden access and secure parking.",
+      "price": "₦980,000 / year",
+      "image": "/images/listing-img-mobile.svg"
+    },
+    {
+      "id": "204",
+      "name": "Sunrise Atelier",
+      "location": "3 Artisan Row",
+      "description": "Light-filled loft with high ceilings and contemporary finishes.",
+      "price": "₦760,000 / year",
+      "image": "/images/listing-img-mobile.svg"
+    },
+    {
+      "id": "205",
+      "name": "Cobalt Flats",
+      "location": "55 Bluewater Avenue",
+      "description": "Compact one-bedroom near transit and neighborhood cafes.",
+      "price": "₦450,000 / year",
+      "image": "/images/listing-img-mobile.svg"
+    },
+    {
+      "id": "206",
+      "name": "Meadowbrook House",
+      "location": "2 Brookside Terrace",
+      "description": "Comfortable townhouse with private courtyard and study nook.",
+      "price": "₦1,150,000 / year",
+      "image": "/images/listing-img-mobile.svg"
+    },
+    {
+      "id": "207",
+      "name": "Orchid Court",
+      "location": "19 Orchid Gate",
+      "description": "Elegant two-bedroom with concierge services and gym access.",
+      "price": "₦1,540,000 / year",
+      "image": "/images/listing-img-mobile.svg"
+    },
+    {
+      "id": "208",
+      "name": "Riverside Nook",
+      "location": "11 Riverbend Close",
+      "description": "Cozy retreat with river views and a furnished kitchenette.",
+      "price": "₦330,000 / year",
+      "image": "/images/listing-img-mobile.svg"
+    }
   ]
 }
