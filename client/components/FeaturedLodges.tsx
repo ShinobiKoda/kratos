@@ -3,11 +3,16 @@ import { FeaturedLodges } from "@/lib/types/Listings";
 import { fetchListings } from "@/lib/api/FetchListings";
 import { IoLocationOutline } from "react-icons/io5";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
 import { motion } from "motion/react";
 import { ListingSkeleton } from "@/components/ListingSkeleton";
 import { staggerItem } from "@/components/animation/motion";
-import Image from "next/image"
+import Image from "next/image";
+import { FaHeart } from "react-icons/fa6";
 
 const FeaturedLodge = () => {
   const [data, setData] = useState<FeaturedLodges[]>([]);
@@ -41,18 +46,12 @@ const FeaturedLodge = () => {
         <CarouselContent>
           {loading
             ? Array.from({ length: 8 }).map((_, i) => (
-                <CarouselItem
-                  key={`skeleton-${i}`}
-                  className="basis-1"
-                >
+                <CarouselItem key={`skeleton-${i}`} className="basis-1">
                   <ListingSkeleton />
                 </CarouselItem>
               ))
             : data.map((item, index) => (
-                <CarouselItem
-                  key={item.id ?? index}
-                  className="basis-1 pb-10"
-                >
+                <CarouselItem key={item.id ?? index} className="basis-1 pb-10">
                   <motion.div
                     variants={staggerItem}
                     initial="hidden"
@@ -62,7 +61,7 @@ const FeaturedLodge = () => {
                     className="w-full max-w-[315px] mx-auto"
                   >
                     <Card className="bg-transparent">
-                      <CardHeader>
+                      <CardHeader className="relative">
                         <Image
                           src={item.image}
                           alt={item.name}
@@ -70,6 +69,13 @@ const FeaturedLodge = () => {
                           width={100}
                           className="w-full max-w-[315px]"
                         />
+                        <FaHeart
+                          className="absolute right-4 top-2 text-(--dark-grey)"
+                          size={22}
+                        />
+                        <p className="absolute bottom-4 left-2 bg-black text-(--light-green) font-medium text-[13px] px-2 rounded-[56px]">
+                          2 room apartment
+                        </p>
                       </CardHeader>
                       <CardContent className="flex flex-col gap-1.5">
                         <h4 className="font-medium leading-normal text-base text-(--gold-yellow)">
@@ -112,7 +118,7 @@ const FeaturedLodge = () => {
                 className="max-w-[273px]"
               >
                 <Card className="bg-transparent">
-                  <CardHeader>
+                  <CardHeader className="relative">
                     <Image
                       src={item.image}
                       alt={item.name}
@@ -120,6 +126,13 @@ const FeaturedLodge = () => {
                       width={100}
                       className="w-full max-w-[273px]"
                     />
+                    <FaHeart
+                      className="absolute right-4 top-2 text-(--dark-grey)"
+                      size={22}
+                    />
+                    <p className="absolute bottom-4 left-2 bg-black text-(--light-green) font-medium text-[13px] px-2 rounded-[56px]">
+                      2 room apartment
+                    </p>
                   </CardHeader>
                   <CardContent className="flex flex-col">
                     <h4 className="font-medium leading-normal text-[20px] text-(--gold-yellow)">
