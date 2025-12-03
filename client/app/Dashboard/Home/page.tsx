@@ -3,7 +3,10 @@ import { inter } from "@/lib/font";
 import { FaHeart } from "react-icons/fa";
 import { SavedListings } from "@/components/SavedListings";
 import RecommendedListing from "@/components/RecommendedListing";
+import { RxCaretDown } from "react-icons/rx";
 import { FaCaretRight } from "react-icons/fa6";
+import { IoLocationOutline } from "react-icons/io5";
+import { CiSearch } from "react-icons/ci";
 import { motion } from "motion/react";
 import { softReveal, slideIn, fadeIn } from "@/components/animation/motion";
 
@@ -17,7 +20,7 @@ const Homepage = () => {
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
           style={{ backgroundImage: "url('/images/hero-img-mobile.svg')" }}
-          className="w-full h-[164px] md:h-[300px] xl:h-[439px] pl-[13px] relative bg-cover bg-no-repeat bg-center rounded-[10px]"
+          className="w-full h-[164px] md:h-[300px] xl:h-[439px] pl-[13px] bg-cover bg-no-repeat bg-center rounded-[10px] relative"
         >
           <motion.div
             variants={fadeIn}
@@ -33,10 +36,35 @@ const Homepage = () => {
               Find your next apartment
             </p>
           </motion.div>
+
+          <div className="w-full px-[150px] absolute -bottom-13 left-0">
+            <div className=" bg-white w-full hidden lg:flex lg:items-center lg:justify-between py-3 px-6 rounded-sm gap-5">
+              <div className=" flex-1 bg-[#767676B2] px-3.5 py-3 rounded-[5px]">
+                <p className="flex items-center justify-between font-medium text-[15px] text-white">
+                  <span>Location</span>
+                  <IoLocationOutline />
+                </p>
+              </div>
+              <div className="flex-1 bg-[#767676B2] px-3.5 py-3 rounded-[5px]">
+                <p className="flex items-center justify-between font-medium text-[15px] text-white">
+                  <span>Apartment type</span>
+                  <RxCaretDown />
+                </p>
+              </div>
+              <div className="flex-2 bg-[#111111CC] px-3.5 py-3 rounded-[5px] flex items-center justify-between">
+                <input
+                  type="text"
+                  className="font-medium text-[15px] text-white/60 outline-none border-none w-full pr-4"
+                  placeholder="Search"
+                ></input>
+                <CiSearch size={20} className="font-medium text-[15px] text-white/60"/>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
 
-      <section className="w-full max-w-[1440px] mx-auto mt-[37px] px-4 xl:px-[82px] md:grid grid-cols-[3fr_1fr] gap-6">
+      <section className="w-full max-w-[1440px] mx-auto mt-[37px] lg:mt-[90px] px-4 xl:px-[82px] md:grid grid-cols-[3fr_1fr] gap-6">
         <motion.div
           variants={softReveal}
           initial="hidden"
