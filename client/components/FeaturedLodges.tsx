@@ -46,7 +46,7 @@ const FeaturedLodge = () => {
         <CarouselContent>
           {loading
             ? Array.from({ length: 8 }).map((_, i) => (
-                <CarouselItem key={`skeleton-${i}`} className="basis-1">
+                <CarouselItem key={`skeleton-${i}`} className="basis-1 max-w-[315px] mx-auto">
                   <ListingSkeleton />
                 </CarouselItem>
               ))

@@ -5,6 +5,7 @@ import Navbar from "../components/layout/Navbar";
 import { AppSidebar } from "@/components/layout/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import SearchInput from "@/components/SearchInput";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -38,6 +39,8 @@ export default function RootLayout({
               <SearchInput />
 
               <main className="mt-4">{children}</main>
+
+             <Footer />
             </div>
           </div>
         </body>

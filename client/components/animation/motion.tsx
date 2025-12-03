@@ -75,3 +75,15 @@ export const softReveal: Variants = {
     transition: { duration: 0.4, ease: "easeOut" },
   },
 };
+
+// Footer reveal (slower, subtle scale and lift)
+export const footerReveal: Variants = {
+  hidden: { opacity: 0, y: 18, scale: 0.985, filter: "blur(4px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
